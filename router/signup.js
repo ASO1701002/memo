@@ -1,6 +1,7 @@
 const Router = require('koa-router');
 const router = new Router();
 const sql = require('../app/sql');
+const connection = require('../app/db')
 const account = require('../app/account')
 
 router.get('/sign_up', async (ctx) => {
@@ -24,17 +25,17 @@ router.post('/sign_up', async (ctx) => {
     let body = ctx.request.body;
     // 必須項目が未完了
     if(typeof body.userId === 'undefined' || typeof body.password === 'undefined'){
-        session.signup_error = "ふつうにダメです";
+        session.signup_error = "全部書いて";
         return ctx.redirect('/sign_up');
     }
     let userId = body.userId;
     let password = body.password;
-    if(await sql.registerAccountDoubleCheck(userId)){
-        await sql.registerAccount(userId, password);
+    if(await account.registerAccountDoubleCheck(userId)){
+        await account.registerAccount(userId, password);
         session.userId = userId;
         return ctx.redirect('/');
     }else{
-        session.signup_error = "同じのはダメです";
+        session.signup_error = "同じのはダメ";
         return ctx.redirect('/sign_up');
     }
 
