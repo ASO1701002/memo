@@ -2,8 +2,10 @@
     <h1>メモ</h1>
     <ul>
         <li><a href="/sign_up">アカウント作成</a></li>
-
-        <li><a href="/login">ログイン</a></li>
-        <li><a href="/login">ログイン</a></li>
+        <% if (typeof userId === 'undefined'){ %>
+            <li><a href="/login">ログイン</a></li>
+        <% } else { %>
+            <li><a href="/logout">ログアウト</a></li>
+        <% } %>
     </ul>
 </main>

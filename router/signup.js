@@ -1,6 +1,5 @@
 const Router = require('koa-router');
 const router = new Router();
-const connection = require('../app/db');
 const sql = require('../app/sql');
 const account = require('../app/account')
 

@@ -1,9 +1,9 @@
 const Router = require('koa-router');
 const router = new Router();
-const account = require('../app/account')
 
 router.get('/', async (ctx)=> {
-    await ctx.render('index')
+    let session = ctx.session;
+    await ctx.render('index',{userId:session.userId})
 })
 
 module.exports = router;
