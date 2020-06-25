@@ -16,6 +16,7 @@ render(app, {
 });
 app.use(server('./public'));
 app.use(koaBody());
+app.keys = ['newest secret key', 'older secret key'];
 app.use(session({
     store: new SQLite3Store('session.db', {}),
     maxAge: 1000 * 60 * 60 * 24,
@@ -25,5 +26,13 @@ app.use(session({
 const indexRouter = require('./router/index');
 app.use(indexRouter.routes());
 app.use(indexRouter.allowedMethods());
+
+const signUpRouter = require('./router/signup');
+app.use(signUpRouter.routes());
+app.use(signUpRouter.allowedMethods());
+
+const logoutRouter = require('./router/logout');
+app.use(logoutRouter.routes());
+app.use(logoutRouter.allowedMethods());
 
 app.listen(5000);
