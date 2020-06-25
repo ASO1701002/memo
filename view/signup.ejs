@@ -1,0 +1,22 @@
+<main>
+    <h1>アカウント作成</h1>
+
+    <% if (typeof data !== 'undefined'){ %>
+        <p style="color: red"><%= data %></p>
+    <% }%>
+    <form action="/sign_up" method="post">
+        <p>
+            <div style="font-weight: bold">
+                ユーザーID
+                <input type="text" name="userId">
+            </div>
+        </p>
+        <p>
+            <div style="font-weight: bold">
+                パスワード
+                <input type="text" name="password">
+            </div>
+        </p>
+        <input type="submit" value="登録">
+    </form>
+</main>
