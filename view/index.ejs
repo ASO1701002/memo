@@ -1,11 +1,40 @@
 <main>
     <h1>メモ</h1>
-    <ul>
-        <li><a href="/sign_up">アカウント作成</a></li>
-        <% if (typeof userId === 'undefined'){ %>
+    <% if (typeof userId === 'undefined'){ %>
+        <ul>
+            <li><a href="/sign_up">アカウント作成</a></li>
             <li><a href="/login">ログイン</a></li>
-        <% } else { %>
+        </ul>
+    <% } else { %>
+        <ul>
             <li><a href="/logout">ログアウト</a></li>
-        <% } %>
-    </ul>
+        </ul>
+        <table>
+            <% for(let row in memoList) { %>
+                <tr>
+                    <form action="/" method="post">
+                        <td><%= Number(row)+1 %></td>
+                        <td><input type="text" name="memo" value="<%= memoList[row] %>"></td>
+                        <input type="hidden" name="requestFlag" value="update">
+                        <input type="hidden" name="updateNum" value="<%= row %>">
+                        <td><input type="submit" value="編集"></td>
+                    </form>
+                    <form action="/" method="post">
+                        <input type="hidden" name="requestFlag" value="delete">
+                        <input type="hidden" name="deleteNum" value="<%= row %>">
+                        <td><input type="submit" value="削除"></td>
+                    </form>
+                </tr>
+            <% } %>
+            <tr>
+                <form action="/" method="post">
+                    <td></td>
+                    <td><input type="text" name="memo"></td>
+                    <input type="hidden" name="requestFlag" value="insert">
+                    <td><input type="submit" value="登録"></td>
+                    <td></td>
+                </form>
+            </tr>
+        </table>
+    <% } %>
 </main>

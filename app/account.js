@@ -28,5 +28,9 @@ module.exports = {
             return true;
         }
         return false;
-    }
+    },
+    getId: async (userId) => {
+        let result = (await connection.query(sql.getId, [userId]))[0][0]['id'];
+        return result;
+    },
 }
